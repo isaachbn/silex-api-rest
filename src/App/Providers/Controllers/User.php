@@ -5,6 +5,7 @@ namespace App\Providers\Controllers;
 use App\Controllers\UserController;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Class User
@@ -39,13 +40,15 @@ class User implements ServiceProviderInterface
         $api->delete('/user/{id}', "user.controller:delete");
 
         $route = '/';
+        /** @var Container $container */
+        $container = $app['container'];
 
-        if ($app["api.endpoint"]) {
-            $route = $route . $app["api.endpoint"];
+        if ($container->hasParameter('endpoint')) {
+            $route = $route . $container->getParameter('endpoint');
         }
 
-        if ($app["api.version"]) {
-            $route = $route . '/' . $app["api.version"];
+        if ($container->hasParameter('version')) {
+            $route = $route . '/' . $container->getParameter('version');
         }
 
         $app->mount($route, $api);

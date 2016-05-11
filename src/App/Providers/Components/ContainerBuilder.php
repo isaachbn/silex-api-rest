@@ -24,8 +24,15 @@ class ContainerBuilder implements ServiceProviderInterface
     public function register(Application $app)
     {
         $container = new ContainerBuilderSymfony();
+        $loader = new YamlFileLoader($container, new FileLocator(ROOT_PATH . '/config'));
+        $loader->load('config.yml');
+        $loader->load('deve.yml');
         $loader = new YamlFileLoader($container, new FileLocator(ROOT_PATH . '/src/Resources'));
         $loader->load('services.yml');
+
+//        if (!getenv('environment')) {
+//            $loader->load('prod.yml');
+//        }
 
         $app['container'] = $container;
     }

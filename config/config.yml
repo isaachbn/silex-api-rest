@@ -1,0 +1,3 @@
+parameters:
+    version: v1
+    endpoint: api

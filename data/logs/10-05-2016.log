@@ -1,3 +1,0 @@
-[2016-05-10 21:09:59] application.INFO: Matched route "GET_api_v1_user". {"route_parameters":{"_controller":"user.controller:getAll","_route":"GET_api_v1_user"},"request_uri":"http://localhost:9001/api/v1/user"} []
-[2016-05-10 21:12:17] application.INFO: Matched route "GET_api_v1_user". {"route_parameters":{"_controller":"user.controller:getAll","_route":"GET_api_v1_user"},"request_uri":"http://localhost:9001/api/v1/user"} []
-[2016-05-10 21:38:37] application.INFO: Matched route "GET_api_v1_user". {"route_parameters":{"_controller":"user.controller:getAll","_route":"GET_api_v1_user"},"request_uri":"http://localhost:9001/api/v1/user"} []

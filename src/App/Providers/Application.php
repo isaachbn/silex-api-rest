@@ -7,6 +7,7 @@ use Monolog\Logger;
 use Silex\Application as ApplicationSilex;
 use Silex\Provider\MonologServiceProvider;
 use Silex\ServiceProviderInterface;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,6 +38,9 @@ class Application implements ServiceProviderInterface
      */
     public function boot(ApplicationSilex $app)
     {
+        /** @var Container $container */
+        $container = $app['container'];
+
         $app->before(function (Request $request) {
 
             if ($request->getMethod() === "OPTIONS") {
@@ -64,7 +68,7 @@ class Application implements ServiceProviderInterface
 
         $app->register(new MonologServiceProvider(), [
             "monolog.logfile" => ROOT_PATH . "data/logs/" . Carbon::now('America/Recife')->format("d-m-Y") . ".log",
-            "monolog.level" => Logger::DEBUG,
+            "monolog.level" => $container->getParameter('debug') ? Logger::DEBUG : Logger::ERROR,
             "monolog.name" => "application"
         ]);
 
