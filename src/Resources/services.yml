@@ -1,0 +1,7 @@
+parameters:
+    app.user_service.class: 'App\Services\UserService'
+
+services:
+    user_service:
+        class: '%app.user_service.class%'
+        arguments: ['@serializer']
